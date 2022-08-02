@@ -17,6 +17,7 @@
     "object-curly-spacing": [
       "warn",
       "always"
-    ]
+    ],
+    "@next/next/no-img-element": "off"
   }
 }
