@@ -3,6 +3,7 @@ import { ToolConstructable, ToolSettings } from '@editorjs/editorjs/types/tools'
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
+import SimpleImage from '../components/editorjsTools/SimpleImage';
 import NavBar from '../components/NavBar';
 
 const EditorJS = dynamic(() => import('../components/EditorJS'), {
@@ -14,12 +15,25 @@ interface Tools {
 }
 
 const tools: Tools = {
+  image: {
+    // FIXME types bugged in current version of EditorJS
+    // @ts-ignore
+    class: SimpleImage,
+    inlineToolbar: true,
+  },
 };
 
 const Home: NextPage = () => {
   const [editorData, setEditorData] = useState<OutputData>({
     time: 0,
     blocks: [
+      {
+        type: 'image',
+        data: {
+          url: 'https://cdn.pixabay.com/photo/2017/09/01/21/53/blue-2705642_1280.jpg',
+          caption: 'Tutturu!!',
+        },
+      },
     ],
   });
 
