@@ -1,4 +1,5 @@
 import {
+  ArrowUpIcon,
   Bars3BottomLeftIcon,
   Bars3Icon,
   BookOpenIcon,
@@ -7,16 +8,19 @@ import {
   LanguageIcon,
   MagnifyingGlassIcon,
   PuzzlePieceIcon,
-  WrenchIcon
+  WrenchIcon,
 } from '@heroicons/react/24/solid';
 import Link from 'next/link';
+import { useRef } from 'react';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const drawerContentRef = useRef<HTMLDivElement>(null);
+
   return (
     <div className="drawer">
       <input id="app-drawer" type="checkbox" className="drawer-toggle" />
 
-      <div className="drawer-content flex flex-col">
+      <div ref={drawerContentRef} className="drawer-content flex flex-col">
         {/* <!-- Navbar --> */}
         <div className="w-full navbar bg-base-300">
           <div className="flex-none lg:hidden">
@@ -115,6 +119,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Page content here */}
         <main className="container mx-auto">{children}</main>
+
+        <button
+          onClick={() => {
+            drawerContentRef.current?.scroll({ top: 0, behavior: 'smooth' });
+          }}
+          className="btn btn-circle absolute bottom-4 right-4 opacity-50"
+        >
+          <ArrowUpIcon className="h-5 w-5" />
+        </button>
       </div>
 
       <div className="drawer-side">
